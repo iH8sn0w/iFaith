@@ -253,22 +253,52 @@ public class iAcqua
 	}
 	private void Button1_Click(System.Object sender, System.EventArgs e)
 	{
-		try {
-			DoIgiveAshit = false;
-			while (!(TextBox1.Text.Length == 16)) {
-				TextBox1.Text = "0" + TextBox1.Text;
-			}
-			ECID = TextBox1.Text;
-			manualecidBTN.Enabled = false;
-			Label2.Text = "Waiting on Server...";
-			Label2.Left = (this.Width / 2) - (Label2.Width / 2);
-			TextBox1.Visible = false;
-			TextBox1.Text = "";
-			manualecidBTN.Visible = false;
-			spinny.Visible = true;
-			PluggedinGrabber();
-		} catch (Exception ex) {
+	try {
+	bool amIhex = false;
+	amIhex = false;
+	DoIgiveAshit = false;
+	if (TextBox1.Text.Contains("A")) {
+		amIhex = true;
+	}
+	if (TextBox1.Text.Contains("B")) {
+		amIhex = true;
+	}
+	if (TextBox1.Text.Contains("C")) {
+		amIhex = true;
+	}
+	if (TextBox1.Text.Contains("D")) {
+		amIhex = true;
+	}
+	if (TextBox1.Text.Contains("E")) {
+		amIhex = true;
+	}
+	if (TextBox1.Text.Contains("F")) {
+		amIhex = true;
+	}
+	if (amIhex == true & !(TextBox1.Text.Length == 16)) {
+		while (!(TextBox1.Text.Length == 16)) {
+			TextBox1.Text = "0" + TextBox1.Text;
 		}
+	}
+	if (amIhex == false) {
+		TextBox1.Text = Conversion.Hex(TextBox1.Text);
+		while (!(TextBox1.Text.Length == 16)) {
+			TextBox1.Text = "0" + TextBox1.Text;
+		}
+	}
+	ECID = TextBox1.Text;
+	manualecidBTN.Enabled = false;
+	Label2.Text = "Waiting on Server...";
+	Label2.Left = (this.Width / 2) - (Label2.Width / 2);
+	TextBox1.Visible = false;
+	TextBox1.Text = "";
+	manualecidBTN.Visible = false;
+	spinny.Visible = true;
+	PluggedinGrabber();
+} catch (Exception ex) {
+	//Interaction.MsgBox(ex.ToString());
+}
+
 	}
 
 	private void dlallBTN_Click(System.Object sender, System.EventArgs e)
